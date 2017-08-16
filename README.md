@@ -23,7 +23,7 @@ For example, [insert RB] is projected to score 289.8 fantasy points. A standard 
 
 ## Usage
 
-You must have [Python installed](https://www.python.org/downloads/)
+You must have [Python 3 installed](https://www.python.org/downloads/)
 
 You must also have your data saved as a csv from http://apps.fantasyfootballanalytics.net/projections/, where you can use their standard
 projections or enter your league's settings to get more accurate results for your draft. Once you have your file, change the global "file"

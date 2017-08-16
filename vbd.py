@@ -100,7 +100,7 @@ if __name__ == "__main__":
             print(name + " was removed")
             print()
         elif choice == 'adjust':
-            pos = input("Position? (QB, RB, WR, TE, DST, K): ")
+            pos = input("Position? (QB, RB, WR, TE, DST, K): ").upper()
             mult = float(input("Multiplier?: "))
 
             projections = projections.apply(func=adjust, axis=1, args=(pos, mult), broadcast=True)
@@ -109,7 +109,7 @@ if __name__ == "__main__":
             print("VBD was adjusted")
             print()
         elif choice == 'draft':
-            pos = input("Position? (ANY, QB, RB, WR, TE, DST, K): ")
+            pos = input("Position? (ANY, QB, RB, WR, TE, DST, K): ").upper()
             print()
             if pos == 'ANY':
                 print(projections.head(1))
@@ -119,7 +119,7 @@ if __name__ == "__main__":
                 print(players.head(1))
             print()
         elif choice == 'display':
-            pos = input("Position? (ALL, QB, RB, WR, TE, DST, K): ")
+            pos = input("Position? (ALL, QB, RB, WR, TE, DST, K): ").upper()
             print()
             if pos == 'ALL':
                 print(projections.head(10))

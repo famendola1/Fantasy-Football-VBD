@@ -12,24 +12,24 @@ draft_size = 272 # 16 teams, 17 players per team
 # Sets the VBD based on player position
 def set_vbd(row):
     if row[1] == 'QB':
-        row[3] = row[2] - replacement_qb
+        row[4] = row[3] - replacement_qb
     elif row[1] == 'RB':
-        row[3] = row[2] - replacement_rb
+        row[4] = row[3] - replacement_rb
     elif row[1] == 'WR':
-        row[3] = row[2] - replacement_wr
+        row[4] = row[3] - replacement_wr
     elif row[1] == 'TE':
-        row[3] = row[2] - replacement_te
+        row[4] = row[3] - replacement_te
     elif row[1] == 'DST':
-        row[3] = row[2] - replacement_dst
+        row[4] = row[3] - replacement_dst
     elif row[1] == 'K':
-        row[3] = row[2] - replacement_k
+        row[4] = row[3] - replacement_k
 
     return row
 
 # Adjusts the VBD based on the given multiplier
 def adjust(row, pos, mult):
     if row[1] == pos:
-        row[3] *= mult
+        row[4] *= mult
     return row
 
 if __name__ == "__main__":
@@ -75,7 +75,7 @@ if __name__ == "__main__":
             replacement_k = replacement_points
 
     # Extract only the relevant columns
-    projections = projections[["player", "playerposition", "points"]]
+    projections = projections[["player", "playerposition", "adp", "points"]]
 
     projections["vbd"] = 0
     projections = projections.apply(func=set_vbd, axis=1, broadcast=True)

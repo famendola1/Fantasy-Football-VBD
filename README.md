@@ -1,6 +1,6 @@
 # Fantasy Football Value Based Drafting
 Last Updated: 8/16/2017
-  
+
 ## [What is Value Based Drafting (VBD)?](https://www.fantasypros.com/2017/06/what-is-value-based-drafting/)
 If the goal were just to find the highest scoring players every year, you would draft a team full of quarterbacks—they were 23 of the top 30 in fantasy points last year. Obviously, no league is set up this way.
 
@@ -38,15 +38,16 @@ In the command line enter:
 You will then be promted with 5 options remove, adjust, draft, display, exit
 
 ### Remove
-You will be promted to enter the player's full name. The name must be exactly as it is in the data, with proper capitalization.
-The player will then be removed and will no longer show up in the "draft" or "display" commands
+```remove [Player Name]```  
+The name must be exactly as it is in the data, with proper capitalization. The player will then be removed and will no longer show up in the "draft" or "display" commands
 Note: Currently doesn't support players with the exact same name
 
 ### Adjust
-You will be prompted to enter a position and a multiplier. The VBD of all the players with the given position will be multiplied by the
+```adjust [position] [multiplier]```  
+The position must be one of QB, RB, WR, TE, DST, or K. The VBD of all the players with the given position will be multiplied by the
 multiplier and the players are resorted to reflect the change.
 
-Sample Multiplier Matrix: 
+Sample Multiplier Matrix:
 
 | Have            | Start 1 | Start 2 | Start 3 | Start 4 | Start 5+ |
 |-----------------|---------|---------|---------|---------|----------|
@@ -56,16 +57,21 @@ Sample Multiplier Matrix:
 | 3 of a position | 0.4     | 0.6     | 0.8     | 1.0     | 1.0      |
 | 4 of a position | 0.2     | 0.4     | 0.6     | 0.8     | 1.0      |
 
+https://www.footballguys.com/05vbdrevisited.htm
+
 ### Draft
-You will be prompted with a position to draft. You will then be given the best available player (assuming you are removing players)
+```draft [position]```  
+The position must be one of ANY, QB, RB, WR, TE, DST, or K. You will be given the best available player (assuming you are removing players)
 based on VBD
 
 ### Display
-You will be prompted with a position to display. You will then be given the 10 best available players (assuming you are removing players)
+```display [position]```  
+The position must be one of ALL, QB, RB, WR, TE, DST, or K. You will be given the 10 best available players (assuming you are removing players)
 based on VBD
 
 ### Exit
-The program will stop running running
+```exit```  
+The program will stop running
 
 ### Output
 The program produces two files, "original.csv" and "updated.csv". original.csv is a condensed version the original input file with a column for VBD.

@@ -84,50 +84,67 @@ if __name__ == "__main__":
 
     while True:
         print("What would you like to do?")
-        print("-- Type 'remove' to remove a player")
-        print("-- Type 'adjust' to adjust VBD")
-        print("-- Type 'draft' to display the player to draft")
-        print("-- Type 'display' to show the top 10 players available")
+        print("-- Type 'remove [Player Name]' to remove a player")
+        print("-- Type 'adjust [position] [multiplier]' to adjust VBD")
+        print("-- Type 'draft [position]' to display the player to draft")
+        print("-- Type 'display [position]' to show the top 10 players available")
         print("-- Type 'exit' to leave")
 
         choice = input()
+        choice = choice.split(" ")
         print()
 
-        if choice == 'remove':
-            name = input("Name?: ")
-            expression = "player != '" + name + "'"
-            projections.query(expr=expression, inplace=True)
-            print(name + " was removed")
-            print()
-        elif choice == 'adjust':
-            pos = input("Position? (QB, RB, WR, TE, DST, K): ").upper()
-            mult = float(input("Multiplier?: "))
+        if choice[0] == 'remove':
+            if len(choice) == 3:
+                name = choice[1] + " " + choice[2]
+                expression = "player != '" + name + "'"
+                projections.query(expr=expression, inplace=True)
+                print(name + " was removed")
+                print()
+            else:
+                print("Invalid use of remove")
+                print()
+        elif choice[0] == 'adjust':
+            if len(choice) == 3:
+                pos = choice[1].upper()
+                mult = choice[2]
 
-            projections = projections.apply(func=adjust, axis=1, args=(pos, mult), broadcast=True)
-            projections.sort_values(by="vbd", inplace=True, ascending=False)
-            projections.to_csv("updated.csv")
-            print("VBD was adjusted")
-            print()
-        elif choice == 'draft':
-            pos = input("Position? (ANY, QB, RB, WR, TE, DST, K): ").upper()
-            print()
-            if pos == 'ANY':
-                print(projections.head(1))
+                projections = projections.apply(func=adjust, axis=1, args=(pos, mult), broadcast=True)
+                projections.sort_values(by="vbd", inplace=True, ascending=False)
+                projections.to_csv("updated.csv")
+                print("VBD was adjusted")
+                print()
             else:
-                expression = "playerposition == '" + pos + "'"
-                players = projections.query(expression)
-                print(players.head(1))
-            print()
-        elif choice == 'display':
-            pos = input("Position? (ALL, QB, RB, WR, TE, DST, K): ").upper()
-            print()
-            if pos == 'ALL':
-                print(projections.head(10))
+                print("Invlid use of adjust")
+                print()
+        elif choice[0] == 'draft':
+            if len(choice) == 2:
+                pos = choice[1].upper()
+                print()
+                if pos == 'ANY':
+                    print(projections.head(1))
+                else:
+                    expression = "playerposition == '" + pos + "'"
+                    players = projections.query(expression)
+                    print(players.head(1))
+                print()
             else:
-                expression = "playerposition == '" + pos + "'"
-                players = projections.query(expression)
-                print(players.head(10))
-            print()
-        elif choice == 'exit':
+                print("Invalid use of draft")
+                print()
+        elif choice[0] == 'display':
+            if len(choice) == 2:
+                pos = choice[1].upper()
+                print()
+                if pos == 'ALL':
+                    print(projections.head(10))
+                else:
+                    expression = "playerposition == '" + pos + "'"
+                    players = projections.query(expression)
+                    print(players.head(10))
+                print()
+            else:
+                print("Invalid use of display")
+                print()
+        elif choice[0] == 'exit':
             print("Good Luck This Season :)")
             break

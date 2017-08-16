@@ -34,6 +34,7 @@ def adjust(row, pos, mult):
 
 if __name__ == "__main__":
     all_projections = pd.read_csv(file)
+    all_projections = all_projections.sort_values(by='adp')
     projections = all_projections.head(draft_size)
 
     all_positions = ['QB', 'RB', 'WR', 'TE', 'DST', 'K']
@@ -55,11 +56,21 @@ if __name__ == "__main__":
         draft_pos = draft_pos.sort_values(by='positionRank')
         last_rank = draft_pos.tail(1)['positionRank'].iloc[0]
 
-        # Get the projected points of the first replacement player
-        expression = "positionRank > " + str(last_rank)
-        replacement_players = all_projections.query(expression)
-        replacement_players = replacement_players.sort_values(by='positionRank')
-        replacement_points = replacement_players.head(1)['points'].iloc[0]
+        # Special case for defenses in big leagues
+        if last_rank != 32:
+            expression_2 = "positionRank > " + str(last_rank)
+
+            # Get players by position
+            replacement_players = all_projections.query(expression)
+
+            # Get players and sort by rank
+            replacement_players = replacement_players.query(expression_2)
+            replacement_players = replacement_players.sort_values(by='positionRank')
+
+            # Get the projected points of the first replacement player
+            replacement_points = replacement_players.head(1)['points'].iloc[0]
+        else:
+            replacement_points = draft_pos.tail(1)['points'].iloc[0]
 
         if pos == 'QB':
             replacement_qb = replacement_points

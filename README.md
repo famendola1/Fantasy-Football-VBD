@@ -38,12 +38,12 @@ In the command line enter:
 You will then be promted with 5 options remove, adjust, draft, display, exit
 
 ### Remove
-```remove [Player Name]```  
+```remove [Player Name]``` or ```r [Player Name]```  
 The name must be exactly as it is in the data, with proper capitalization. The player will then be removed and will no longer show up in the "draft" or "display" commands
 Note: Currently doesn't support players with the exact same name
 
 ### Adjust
-```adjust [position] [multiplier]```  
+```adjust [position] [multiplier]``` or ```a [position] [multiplier]```  
 The position must be one of QB, RB, WR, TE, DST, or K. The VBD of all the players with the given position will be multiplied by the
 multiplier and the players are resorted to reflect the change.
 
@@ -60,17 +60,17 @@ Sample Multiplier Matrix:
 https://www.footballguys.com/05vbdrevisited.htm
 
 ### Draft
-```draft [position]```  
+```draft [position]``` or ```dr [position]```  
 The position must be one of ANY, QB, RB, WR, TE, DST, or K. You will be given the best available player (assuming you are removing players)
 based on VBD
 
 ### Display
-```display [position]```  
+```display [position]``` or ```di [position]```  
 The position must be one of ALL, QB, RB, WR, TE, DST, or K. You will be given the 10 best available players (assuming you are removing players)
 based on VBD
 
 ### Exit
-```exit```  
+```exit``` or ```e```  
 The program will stop running
 
 ### Output

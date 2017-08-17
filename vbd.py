@@ -105,7 +105,7 @@ if __name__ == "__main__":
         choice = choice.split(" ")
         print()
 
-        if choice[0] == 'remove':
+        if choice[0] == 'remove' or choice[0] == 'r':
             if len(choice) == 3:
                 name = choice[1] + " " + choice[2]
                 expression = "player != '" + name + "'"
@@ -115,20 +115,20 @@ if __name__ == "__main__":
             else:
                 print("Invalid use of remove")
                 print()
-        elif choice[0] == 'adjust':
+        elif choice[0] == 'adjust' or choice[0] == 'a':
             if len(choice) == 3:
                 pos = choice[1].upper()
-                mult = choice[2]
+                mult = float(choice[2])
 
                 projections = projections.apply(func=adjust, axis=1, args=(pos, mult), broadcast=True)
                 projections.sort_values(by="vbd", inplace=True, ascending=False)
                 projections.to_csv("updated.csv")
-                print("VBD was adjusted")
+                print("VBD for " + pos + " was adjusted")
                 print()
             else:
                 print("Invlid use of adjust")
                 print()
-        elif choice[0] == 'draft':
+        elif choice[0] == 'draft' or choice[0] == 'dr':
             if len(choice) == 2:
                 pos = choice[1].upper()
                 print()
@@ -142,7 +142,7 @@ if __name__ == "__main__":
             else:
                 print("Invalid use of draft")
                 print()
-        elif choice[0] == 'display':
+        elif choice[0] == 'display' or choice[0] == 'di':
             if len(choice) == 2:
                 pos = choice[1].upper()
                 print()
@@ -156,6 +156,6 @@ if __name__ == "__main__":
             else:
                 print("Invalid use of display")
                 print()
-        elif choice[0] == 'exit':
+        elif choice[0] == 'exit' or choice[0] == 'e':
             print("Good Luck This Season :)")
             break

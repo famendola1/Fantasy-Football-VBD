@@ -35,7 +35,7 @@ Next, change the "draft_size" variable to the size of your draft which should be
 In the command line enter:  
 ```python3 vbd.py``` or ```./vbd.py```, if you prefer an executable.  
 
-You will then be promted with 5 options remove, adjust, draft, display, exit
+You will then be promted with 5 options: remove, adjust, draft, display, exit
 
 ### Remove
 ```remove [Player Name]``` or ```r [Player Name]```  

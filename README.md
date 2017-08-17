@@ -1,5 +1,5 @@
 # Fantasy Football Value Based Drafting
-Last Updated: 8/16/2017
+Last Updated: 8/17/2017
 
 ## [What is Value Based Drafting (VBD)?](https://www.fantasypros.com/2017/06/what-is-value-based-drafting/)
 If the goal were just to find the highest scoring players every year, you would draft a team full of quarterbacks—they were 23 of the top 30 in fantasy points last year. Obviously, no league is set up this way.
@@ -39,7 +39,7 @@ You will then be promted with 5 options remove, adjust, draft, display, exit
 
 ### Remove
 ```remove [Player Name]``` or ```r [Player Name]```  
-The name must be exactly as it is in the data, with proper capitalization. The player will then be removed and will no longer show up in the "draft" or "display" commands
+The name must be exactly as it is in the data, with proper capitalization. For defense's with only one word in the name you must add a space after name. The player will then be removed and will no longer show up in the "draft" or "display" commands
 Note: Currently doesn't support players with the exact same name
 
 ### Adjust

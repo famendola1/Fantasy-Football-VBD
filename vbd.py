@@ -108,6 +108,7 @@ if __name__ == "__main__":
         if choice[0] == 'remove' or choice[0] == 'r':
             if len(choice) == 3:
                 name = choice[1] + " " + choice[2]
+                name = name.strip()
                 expression = "player != '" + name + "'"
                 projections.query(expr=expression, inplace=True)
                 print(name + " was removed")

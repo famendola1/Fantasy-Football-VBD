@@ -16,7 +16,7 @@ VBD isn’t perfect. It relies on generating accurate player projections and cho
 
 VBD also leaves out a lot of the nuance required to build a balanced team, and mostly ignores ADP in calculating “value.” VBD is a useful concept despite these flaws. It serves as just one of many ways you should be preparing for your draft.
 
-## [Calculating VBD using VOPR](https://www.fantasypros.com/2017/06/what-is-value-based-drafting/)
+## [Calculating VBD using VORP](https://www.fantasypros.com/2017/06/what-is-value-based-drafting/)
 You generate VBD rankings by creating projections for every player, setting a baseline at each position, then calculating the difference between the two for each player.
 
 For example, [insert RB] is projected to score 289.8 fantasy points. A standard 12 team league has 180 players drafted, and [the consensus ADP](https://www.fantasypros.com/nfl/adp/qb.php) shows X running backs being drafted in the top 180. That makes the (X+1)th running back, [insert RB] and his projected 67.1 fantasy points, the baseline for running backs using a VORP calculation. [first RB]’s VORP—his projected points minus [second RB]’s projected points—ends up a whopping 222.7.
@@ -35,7 +35,7 @@ Next, change the "draft_size" variable to the size of your draft which should be
 In the command line enter:  
 ```python3 vbd.py``` or ```./vbd.py```, if you prefer an executable.  
 
-You will then be promted with 5 options remove, adjust, draft, display, exit
+You will then be promted with 5 options: remove, adjust, draft, display, exit
 
 ### Remove
 ```remove [Player Name]``` or ```r [Player Name]```  

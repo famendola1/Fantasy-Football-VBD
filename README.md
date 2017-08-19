@@ -26,16 +26,14 @@ For example, [insert RB] is projected to score 289.8 fantasy points. A standard 
 You must have [Python 3](https://www.python.org/downloads/), [pandas](https://pandas.pydata.org/pandas-docs/stable/install.html), and [numpy](https://scipy.org/install.html) installed.  
 
 You must also have your data saved as a csv from http://apps.fantasyfootballanalytics.net/projections/, where you can use their standard
-projections or enter your league's settings to get more accurate results for your draft. Once you have your file, change the global "file"
-variable to the path to your data file.
-
-Next, change the "draft_size" variable to the size of your draft which should be:  
-```draft_size = (number of teams) x (number of players per team).```
+projections or enter your league's settings to get more accurate results for your draft.
 
 In the command line enter:  
-```python3 vbd.py``` or ```./vbd.py```, if you prefer an executable.  
+```python vbd.py [draft_size] [data_file]``` or ```./vbd.py [draft_size] [data_file]```, where:
+* ```draft_size = (number of teams) x (number of players per team)```
+* data_file is the CSV file with the projections
 
-You will then be promted with 5 options: remove, adjust, draft, display, exit
+You will then be prompted with 5 options: remove, adjust, draft, display, exit
 
 ### Remove
 ```remove [Player Name]``` or ```r [Player Name]```  

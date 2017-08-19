@@ -37,7 +37,6 @@ if __name__ == "__main__":
     all_projections = all_projections.query("team != 'FA'") # remove free agents
     all_projections = all_projections.sort_values(by='overallRank')
     projections = all_projections.head(draft_size)
-    projections.to_csv('test.csv')
 
     all_positions = ['QB', 'RB', 'WR', 'TE', 'DST', 'K']
 
@@ -129,7 +128,7 @@ if __name__ == "__main__":
                 print("VBD for " + pos + " was adjusted")
                 print()
             else:
-                print("Invlid use of adjust")
+                print("Invalid use of adjust")
                 print()
         elif choice[0] == 'draft' or choice[0] == 'dr':
             if len(choice) == 2:

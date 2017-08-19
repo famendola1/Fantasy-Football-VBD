@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 
-file = "ffa_customrankings2017-0.csv"
+file = "projections_2017.csv"
 
 draft_size = 272 # 16 teams, 17 players per team
 
@@ -34,8 +34,10 @@ def adjust(row, pos, mult):
 
 if __name__ == "__main__":
     all_projections = pd.read_csv(file)
-    all_projections = all_projections.sort_values(by='adp')
+    all_projections = all_projections.query("team != 'FA'") # remove free agents
+    all_projections = all_projections.sort_values(by='overallRank')
     projections = all_projections.head(draft_size)
+    projections.to_csv('test.csv')
 
     all_positions = ['QB', 'RB', 'WR', 'TE', 'DST', 'K']
 
@@ -57,7 +59,7 @@ if __name__ == "__main__":
         last_rank = draft_pos.tail(1)['positionRank'].iloc[0]
 
         # Special case for defenses in big leagues
-        if last_rank != 32:
+        if last_rank != 32 and pos != 'DST':
             expression_2 = "positionRank > " + str(last_rank)
 
             # Get players by position

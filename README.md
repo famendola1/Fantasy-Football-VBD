@@ -30,6 +30,8 @@ projections or enter your league's settings to get more accurate results for you
 
 In the command line enter:  
 ```python vbd.py [league_size] [team_size] [data_file]``` or ```./vbd.py [draft_size] [data_file]```, where:
+* league_size is the number of teams in your league
+* team_size is the number of players on each team
 * data_file is the CSV file with the projections
 
 You will then be prompted with 5 options: remove, adjust, draft, display, exit

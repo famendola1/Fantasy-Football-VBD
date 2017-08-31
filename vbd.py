@@ -108,6 +108,7 @@ if __name__ == "__main__":
         print("-- Type 'draft [position]' to display the player to draft")
         print(
             "-- Type 'display [position]' to show the top 10 players available")
+        print("-- Type 'search [Player Name]' to search for a player")
         print("-- Type 'exit' to leave")
 
         choice = input()
@@ -116,7 +117,7 @@ if __name__ == "__main__":
 
         if choice[0] == 'remove' or choice[0] == 'r':
             if len(choice) == 3:
-                name = choice[1] + " " + choice[2]
+                name = choice[1].title() + " " + choice[2].title()
                 name = name.strip()
                 expression = "player != '" + name + "'"
                 projections.query(expr=expression, inplace=True)
@@ -167,6 +168,17 @@ if __name__ == "__main__":
                 print()
             else:
                 print("Invalid use of display")
+                print()
+        elif choice[0] == 'search' or choice[0] == 's':
+            if len(choice) == 3:
+                name = choice[1].title() + " " + choice[2].title()
+                name = name.strip()
+                expression = "player == '" + name + "'"
+                player = projections.query(expression)
+                print(player)
+                print()
+            else:
+                print("Invalid use of search")
                 print()
         elif choice[0] == 'exit' or choice[0] == 'e':
             print("Good Luck This Season :)")

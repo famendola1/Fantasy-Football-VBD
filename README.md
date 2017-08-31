@@ -34,7 +34,7 @@ In the command line enter:
 * team_size is the number of players on each team
 * data_file is the CSV file with the projections
 
-You will then be prompted with 5 options: remove, adjust, draft, display, exit
+You will then be prompted with 6 options: remove, adjust, draft, display, search, exit
 
 ### Remove
 ```remove [Player Name]``` or ```r [Player Name]```  
@@ -67,6 +67,10 @@ based on VBD
 ```display [position]``` or ```di [position]```  
 The position must be one of ALL, QB, RB, WR, TE, DST, or K. You will be given the 10 best available players (assuming you are removing players)
 based on VBD
+
+### Search
+```search [Player Name]``` or ```s [Player Name]```  
+The name must be exactly as it is in the data, with proper capitalization. For defense's with only one word in the name you must add a space after name. You be given the average draft position, projected points, and VBD of the player.
 
 ### Exit
 ```exit``` or ```e```  

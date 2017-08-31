@@ -1,5 +1,5 @@
 # Fantasy Football Value Based Drafting
-Last Updated: 8/17/2017
+Last Updated: 8/30/2017
 
 ## [What is Value Based Drafting (VBD)?](https://www.fantasypros.com/2017/06/what-is-value-based-drafting/)
 If the goal were just to find the highest scoring players every year, you would draft a team full of quarterbacks—they were 23 of the top 30 in fantasy points last year. Obviously, no league is set up this way.
@@ -29,8 +29,7 @@ You must also have your data saved as a csv from http://apps.fantasyfootballanal
 projections or enter your league's settings to get more accurate results for your draft.
 
 In the command line enter:  
-```python vbd.py [draft_size] [data_file]``` or ```./vbd.py [draft_size] [data_file]```, where:
-* ```draft_size = (number of teams) x (number of players per team)```
+```python vbd.py [league_size] [team_size] [data_file]``` or ```./vbd.py [draft_size] [data_file]```, where:
 * data_file is the CSV file with the projections
 
 You will then be prompted with 5 options: remove, adjust, draft, display, exit

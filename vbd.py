@@ -34,8 +34,8 @@ def adjust(row, pos, mult):
     return row
 
 if __name__ == "__main__":
-    draft_size = int(sys.argv[1])
-    file = sys.argv[2]
+    draft_size = int(sys.argv[1]) * int(sys.argv[2])
+    file = sys.argv[3]
 
     # Read csv file and prepare data for use
     all_projections = pd.read_csv(file)

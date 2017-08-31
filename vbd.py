@@ -56,7 +56,7 @@ if __name__ == "__main__":
     for pos in all_positions:
         # Query the position players to find the last ranked at that position
         # that would be drafted
-        expression = "playerposition == '" + pos + "'"
+        expression = "position == '" + pos + "'"
         draft_pos = projections.query(expression)
 
         # Get the last rank in the draft
@@ -94,7 +94,7 @@ if __name__ == "__main__":
             replacement_k = replacement_points
 
     # Extract only the relevant columns
-    projections = projections[["player", "playerposition", "adp", "points"]]
+    projections = projections[["player", "position", "adp", "points"]]
 
     projections["vbd"] = 0
     projections = projections.apply(func=set_vbd, axis=1, broadcast=True)
@@ -147,7 +147,7 @@ if __name__ == "__main__":
                 if pos == 'ANY':
                     print(projections.head(1))
                 else:
-                    expression = "playerposition == '" + pos + "'"
+                    expression = "position == '" + pos + "'"
                     players = projections.query(expression)
                     print(players.head(1))
                 print()
@@ -161,7 +161,7 @@ if __name__ == "__main__":
                 if pos == 'ALL':
                     print(projections.head(10))
                 else:
-                    expression = "playerposition == '" + pos + "'"
+                    expression = "position == '" + pos + "'"
                     players = projections.query(expression)
                     print(players.head(10))
                 print()

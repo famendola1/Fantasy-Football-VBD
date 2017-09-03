@@ -77,5 +77,5 @@ The name must be exactly as it is in the data, with proper capitalization. For d
 The program will stop running
 
 ### Output
-The program produces two files, "original.csv" and "updated.csv". original.csv is a condensed version the original input file with a column for VBD.
+The program produces two files, "original.csv" and "updated.csv". original.csv is a condensed version of the original input file with a column for VBD.
 updated.csv is the same as original.csv but is updated everytime you remove a player.

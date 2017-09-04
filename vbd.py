@@ -25,9 +25,23 @@ def set_vbd(row):
 
     return row
 
+def set_poa(row):
+    if row[1] == 'QB':
+        row[5] = row[4] - avg_qb
+    elif row[1] == 'RB':
+        row[5] = row[4] - avg_rb
+    elif row[1] == 'WR':
+        row[5] = row[5] - avg_wr
+    elif row[1] == 'TE':
+        row[5] = row[4] - avg_te
+    elif row[1] == 'DST':
+        row[5] = row[4] - avg_dst
+    elif row[1] == 'K':
+        row[5] = row[4] - avg_k
+
+    return row
+
 # Adjusts the VBD based on the given multiplier
-
-
 def adjust(row, pos, mult):
     if row[1] == pos:
         row[4] *= mult
@@ -99,6 +113,18 @@ if __name__ == "__main__":
     projections["vbd"] = 0
     projections = projections.apply(func=set_vbd, axis=1, broadcast=True)
     projections = projections.sort_values(by="vbd", ascending=False)
+    
+    # Calculate the points above average for vbd
+    avg_qb = np.mean(projections.query("position == 'QB'")['vbd'])
+    avg_rb = np.mean(projections.query("position == 'RB'")['vbd'])
+    avg_wr = np.mean(projections.query("position == 'WR'")['vbd'])
+    avg_te = np.mean(projections.query("position == 'TE'")['vbd'])
+    avg_dst = np.mean(projections.query("position == 'DST'")['vbd'])
+    avg_k = np.mean(projections.query("position == 'K'")['vbd'])
+
+    projections["poa"] = 0
+    projections = projections.apply(func=set_poa, axis=1, broadcast=True)
+
     projections.to_csv("original.csv")
 
     while True:
@@ -117,7 +143,7 @@ if __name__ == "__main__":
 
         if choice[0] == 'remove' or choice[0] == 'r':
             if len(choice) == 3:
-                name = choice[1].title() + " " + choice[2].title()
+                name = choice[1] + " " + choice[2]
                 name = name.strip()
                 expression = "player != '" + name + "'"
                 projections.query(expr=expression, inplace=True)
@@ -160,7 +186,8 @@ if __name__ == "__main__":
                 pos = choice[1].upper()
                 print()
                 if pos == 'ALL':
-                    print(projections.head(10))
+                    proj_poa = projections.sort_values(by="poa", ascending=False);
+                    print(proj_poa.head(10))
                 else:
                     expression = "position == '" + pos + "'"
                     players = projections.query(expression)
@@ -171,7 +198,7 @@ if __name__ == "__main__":
                 print()
         elif choice[0] == 'search' or choice[0] == 's':
             if len(choice) == 3:
-                name = choice[1].title() + " " + choice[2].title()
+                name = choice[1] + " " + choice[2]
                 name = name.strip()
                 expression = "player == '" + name + "'"
                 player = projections.query(expression)

@@ -11,40 +11,40 @@ import sys
 
 def set_vbd(row):
     if row[1] == 'QB':
-        row[4] = row[3] - replacement_qb
+        row[5] = row[4] - replacement_qb
     elif row[1] == 'RB':
-        row[4] = row[3] - replacement_rb
+        row[5] = row[4] - replacement_rb
     elif row[1] == 'WR':
-        row[4] = row[3] - replacement_wr
+        row[5] = row[4] - replacement_wr
     elif row[1] == 'TE':
-        row[4] = row[3] - replacement_te
+        row[5] = row[4] - replacement_te
     elif row[1] == 'DST':
-        row[4] = row[3] - replacement_dst
+        row[5] = row[4] - replacement_dst
     elif row[1] == 'K':
-        row[4] = row[3] - replacement_k
+        row[5] = row[4] - replacement_k
 
     return row
 
 def set_poa(row):
     if row[1] == 'QB':
-        row[5] = row[4] - avg_qb
+        row[6] = row[5] - avg_qb
     elif row[1] == 'RB':
-        row[5] = row[4] - avg_rb
+        row[6] = row[5] - avg_rb
     elif row[1] == 'WR':
-        row[5] = row[4] - avg_wr
+        row[6] = row[5] - avg_wr
     elif row[1] == 'TE':
-        row[5] = row[4] - avg_te
+        row[6] = row[5] - avg_te
     elif row[1] == 'DST':
-        row[5] = row[4] - avg_dst
+        row[6] = row[5] - avg_dst
     elif row[1] == 'K':
-        row[5] = row[4] - avg_k
+        row[6] = row[5] - avg_k
 
     return row
 
 # Adjusts the VBD based on the given multiplier
 def adjust(row, pos, mult):
     if row[1] == pos:
-        row[4] *= mult
+        row[5] *= mult
     return row
 
 if __name__ == "__main__":
@@ -108,7 +108,7 @@ if __name__ == "__main__":
             replacement_k = replacement_points
 
     # Extract only the relevant columns
-    projections = projections[["player", "position", "adp", "points"]]
+    projections = projections[["player", "position", "team", "adp", "points"]]
 
     projections["vbd"] = 0
     projections = projections.apply(func=set_vbd, axis=1, broadcast=True)

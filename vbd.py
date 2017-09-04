@@ -31,7 +31,7 @@ def set_poa(row):
     elif row[1] == 'RB':
         row[5] = row[4] - avg_rb
     elif row[1] == 'WR':
-        row[5] = row[5] - avg_wr
+        row[5] = row[4] - avg_wr
     elif row[1] == 'TE':
         row[5] = row[4] - avg_te
     elif row[1] == 'DST':

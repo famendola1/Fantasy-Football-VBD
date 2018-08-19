@@ -129,7 +129,7 @@ if __name__ == "__main__":
     projections = projections.apply(
         func=set_poa, axis=1, result_type='broadcast')
 
-    projections.to_csv("original.csv")
+    projections.to_csv("original.csv", index=False)
 
     while True:
         print("> ", end=" ")
@@ -143,6 +143,7 @@ if __name__ == "__main__":
                 name = name.strip()
                 expression = "player != '" + name + "'"
                 projections.query(expr=expression, inplace=True)
+                projections.to_csv("updated.csv", index=False)
                 print(name + " was removed")
                 print()
             else:
@@ -204,6 +205,12 @@ if __name__ == "__main__":
             else:
                 print("Invalid use of search")
                 print()
+        elif choice[0] == 'load' or choice[0] == 'l':
+            try:
+                projections = pd.read_csv(choice[1])
+            except FileNotFoundError:
+                print("File not found")
+                print()
         elif choice[0] == 'help' or choice[0] == 'h':
             print("What would you like to do?")
             print("-- Type 'remove [Player Name]' to remove a player")
@@ -212,8 +219,13 @@ if __name__ == "__main__":
             print(
                 "-- Type 'display [position]' to show the top 10 players available")
             print("-- Type 'search [Player Name]' to search for a player")
+            print("-- Type 'load [file]' to load the data from this file")
+            print("-- Type 'help' to view this page")
             print("-- Type 'exit' to leave")
             print()
         elif choice[0] == 'exit' or choice[0] == 'e':
             print("Good Luck This Season :)")
             break
+        else:
+            print("Ivalid command. Type 'help' to view options.")
+            print()

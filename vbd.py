@@ -7,44 +7,43 @@ import sys
 # Value Over Replacement Player (VORP)
 
 # Sets the VBD based on player position
-
-
 def set_vbd(row):
-    if row[1] == 'QB':
-        row[5] = row[4] - replacement_qb
-    elif row[1] == 'RB':
-        row[5] = row[4] - replacement_rb
-    elif row[1] == 'WR':
-        row[5] = row[4] - replacement_wr
-    elif row[1] == 'TE':
-        row[5] = row[4] - replacement_te
-    elif row[1] == 'DST':
-        row[5] = row[4] - replacement_dst
-    elif row[1] == 'K':
-        row[5] = row[4] - replacement_k
+    if row["position"] == 'QB':
+        row["vbd"] = row["points"] - replacement_qb
+    elif row["position"] == 'RB':
+        row["vbd"] = row["points"] - replacement_rb
+    elif row["position"] == 'WR':
+        row["vbd"] = row["points"] - replacement_wr
+    elif row["position"] == 'TE':
+        row["vbd"] = row["points"] - replacement_te
+    elif row["position"] == 'DST':
+        row["vbd"] = row["points"] - replacement_dst
+    elif row["position"] == 'K':
+        row["vbd"] = row["points"] - replacement_k
 
     return row
 
+# Sets points above average
 def set_poa(row):
-    if row[1] == 'QB':
-        row[6] = row[5] - avg_qb
-    elif row[1] == 'RB':
-        row[6] = row[5] - avg_rb
-    elif row[1] == 'WR':
-        row[6] = row[5] - avg_wr
-    elif row[1] == 'TE':
-        row[6] = row[5] - avg_te
-    elif row[1] == 'DST':
-        row[6] = row[5] - avg_dst
-    elif row[1] == 'K':
-        row[6] = row[5] - avg_k
+    if row["position"] == 'QB':
+        row["poa"] = row["vbd"] - avg_qb
+    elif row["position"] == 'RB':
+        row["poa"] = row["vbd"] - avg_rb
+    elif row["position"] == 'WR':
+        row["poa"] = row["vbd"] - avg_wr
+    elif row["position"] == 'TE':
+        row["poa"] = row["vbd"] - avg_te
+    elif row["position"] == 'DST':
+        row["poa"] = row["vbd"] - avg_dst
+    elif row["position"] == 'K':
+        row["poa"] = row["vbd"] - avg_k
 
     return row
 
 # Adjusts the VBD based on the given multiplier
 def adjust(row, pos, mult):
-    if row[1] == pos:
-        row[5] *= mult
+    if row["position"] == pos:
+        row["vbd"] *= mult
     return row
 
 if __name__ == "__main__":
@@ -53,8 +52,11 @@ if __name__ == "__main__":
 
     # Read csv file and prepare data for use
     all_projections = pd.read_csv(file)
+
+    # remove free agents and defense
     all_projections = all_projections.query(
-        "team != 'FA'")  # remove free agents
+        "team != 'FA' and position != 'DB' and position != 'DL' and position != 'LB'")
+
     all_projections = all_projections.sort_values(by='overallRank')
     projections = all_projections.head(draft_size)
 
@@ -111,9 +113,10 @@ if __name__ == "__main__":
     projections = projections[["player", "position", "team", "adp", "points"]]
 
     projections["vbd"] = 0
-    projections = projections.apply(func=set_vbd, axis=1, broadcast=True)
+    projections = projections.apply(
+        func=set_vbd, axis=1, result_type='broadcast')
     projections = projections.sort_values(by="vbd", ascending=False)
-    
+
     # Calculate the points above average for vbd
     avg_qb = np.mean(projections.query("position == 'QB'")['vbd'])
     avg_rb = np.mean(projections.query("position == 'RB'")['vbd'])
@@ -123,20 +126,13 @@ if __name__ == "__main__":
     avg_k = np.mean(projections.query("position == 'K'")['vbd'])
 
     projections["poa"] = 0
-    projections = projections.apply(func=set_poa, axis=1, broadcast=True)
+    projections = projections.apply(
+        func=set_poa, axis=1, result_type='broadcast')
 
     projections.to_csv("original.csv")
 
     while True:
-        print("What would you like to do?")
-        print("-- Type 'remove [Player Name]' to remove a player")
-        print("-- Type 'adjust [position] [multiplier]' to adjust VBD")
-        print("-- Type 'draft [position]' to display the player to draft")
-        print(
-            "-- Type 'display [position]' to show the top 10 players available")
-        print("-- Type 'search [Player Name]' to search for a player")
-        print("-- Type 'exit' to leave")
-
+        print("> ", end=" ")
         choice = input()
         choice = choice.split(" ")
         print()
@@ -158,7 +154,7 @@ if __name__ == "__main__":
                 mult = float(choice[2])
 
                 projections = projections.apply(
-                    func=adjust, axis=1, args=(pos, mult), broadcast=True)
+                    func=adjust, axis=1, args=(pos, mult), result_type='broadcast')
                 projections.sort_values(
                     by="vbd", inplace=True, ascending=False)
                 projections.to_csv("updated.csv")
@@ -186,7 +182,8 @@ if __name__ == "__main__":
                 pos = choice[1].upper()
                 print()
                 if pos == 'ALL':
-                    proj_poa = projections.sort_values(by="poa", ascending=False);
+                    proj_poa = projections.sort_values(
+                        by="poa", ascending=False)
                     print(proj_poa.head(10))
                 else:
                     expression = "position == '" + pos + "'"
@@ -207,6 +204,16 @@ if __name__ == "__main__":
             else:
                 print("Invalid use of search")
                 print()
+        elif choice[0] == 'help' or choice[0] == 'h':
+            print("What would you like to do?")
+            print("-- Type 'remove [Player Name]' to remove a player")
+            print("-- Type 'adjust [position] [multiplier]' to adjust VBD")
+            print("-- Type 'draft [position]' to display the player to draft")
+            print(
+                "-- Type 'display [position]' to show the top 10 players available")
+            print("-- Type 'search [Player Name]' to search for a player")
+            print("-- Type 'exit' to leave")
+            print()
         elif choice[0] == 'exit' or choice[0] == 'e':
             print("Good Luck This Season :)")
             break

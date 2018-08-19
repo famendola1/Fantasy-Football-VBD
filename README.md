@@ -1,5 +1,5 @@
 # Fantasy Football Value Based Drafting
-Last Updated: 8/30/2017
+Last Updated: 8/19/2018
 
 ## [What is Value Based Drafting (VBD)?](https://www.fantasypros.com/2017/06/what-is-value-based-drafting/)
 If the goal were just to find the highest scoring players every year, you would draft a team full of quarterbacks—they were 23 of the top 30 in fantasy points last year. Obviously, no league is set up this way.
@@ -72,10 +72,14 @@ based on VBD
 ```search [Player Name]``` or ```s [Player Name]```  
 The name must be exactly as it is in the data, with proper capitalization. For defense's with only one word in the name you must add a space after name. You be given the average draft position, projected points, and VBD of the player.
 
+### Help
+```help``` or ```h```
+The usage for this program will be printed
+
 ### Exit
 ```exit``` or ```e```  
 The program will stop running
 
 ### Output
 The program produces two files, "original.csv" and "updated.csv". original.csv is a condensed version of the original input file with a column for VBD.
-updated.csv is the same as original.csv but is updated everytime you remove a player.
+updated.csv is the same as original.csv but is updated every time you remove a player.

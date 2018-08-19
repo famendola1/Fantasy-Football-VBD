@@ -73,11 +73,11 @@ based on VBD
 The name must be exactly as it is in the data, with proper capitalization. For defense's with only one word in the name you must add a space after name. You be given the average draft position, projected points, and VBD of the player.
 
 ### Load
-```load [file]``` or ```l [file]```
+```load [file]``` or ```l [file]```  
 The file specified should either be original.csv or updated.csv, which are both outputted by this program. From this point the program will use the data that is in the file.
 
 ### Help
-```help``` or ```h```
+```help``` or ```h```  
 The usage for this program will be printed
 
 ### Exit
